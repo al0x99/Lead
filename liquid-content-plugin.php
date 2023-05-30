@@ -51,6 +51,8 @@ function save_liquid_data() {
     $table_name = $wpdb->prefix . 'liquid_content';
 
     $data = $_POST['data'];
+    $user_ip = $_SERVER['REMOTE_ADDR'];
+    $data['user_ip'] = $user_ip;
     $data_encoded = json_encode($data);
 
     $wpdb->insert($table_name, array(
@@ -58,5 +60,6 @@ function save_liquid_data() {
         'data' => $data_encoded
     ));
 
-    wp_die(); // finisci l'esecuzione
+    wp_die();
 }
+
